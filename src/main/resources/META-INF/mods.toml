@@ -1,0 +1,26 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "${license}"
+issueTrackerURL = "${issues_url}"
+
+[[mods]]
+modId = "${id}"
+displayName = "${name}"
+version = "${version}"
+displayURL = "${homepage_url}"
+modUrl = "${homepage_url}"
+updateJSONURL = "https://api.modrinth.com/updates/${modrinth_id}/forge_updates.json?forge=only"
+logoFile = "icon.png"
+logoBlur = false
+displayTest = "IGNORE_SERVER_VERSION"
+authors = "${authors}"
+credits = "${contributors}"
+
+description = '''${description}'''
+
+[[mixins]]
+config = "${id}.mixins.json"
+
+[modproperties.${id}]
+catalogueImageIcon="icon.png"
+${dependencies}

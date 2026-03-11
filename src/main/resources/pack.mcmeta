@@ -1,0 +1,9 @@
+{
+	"pack": {
+		"pack_format": 15,
+		"supported_formats": [7,94],
+		"min_format": 7,
+		"max_format": 94,
+		"description": "Resources for Armed Stands by Tschipcraft"
+	}
+}

@@ -1,0 +1,13 @@
+{
+  "package": "net.tschipcraft.armedstands.mixin",
+  "required": true,
+  "minVersion": "0.8",
+  "compatibilityLevel": "${java}",
+  "mixins": [
+    "ArmorStandConstructorMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
