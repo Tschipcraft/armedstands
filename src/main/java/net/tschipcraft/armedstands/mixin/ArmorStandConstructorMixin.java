@@ -86,11 +86,12 @@ public abstract class ArmorStandConstructorMixin implements ArmorStandAccessor {
 			}
 		}
 
-		// Technically, Mojang has implemented logic to drop more than two hand items. We'll ignore this since armor stands normally only have two arms
+		// Technically, Mojang has implemented logic to drop more than two hand items.
+		// We'll ignore this since armor stands normally only have two arms
 	}
 
 	@Unique
-    private boolean armedStands$isRemoveDisabled(EquipmentSlot slot) {
+	private boolean armedStands$isRemoveDisabled(EquipmentSlot slot) {
 		int flag;
 		//? >= 1.21.3 {
 		//flag = slot.getFilterBit(0);
