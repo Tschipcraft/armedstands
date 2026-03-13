@@ -33,15 +33,17 @@ public class ArmorStandInteract {
             return InteractionResult.PASS;
         }
 
-        // Toggle arms
-        if (/*? >= 1.21.3 >>*//*armorStand.showArms()*/ /*? < 1.21.3 >>*/armorStand.isShowArms() ) {
-            // Drop items from armor stand if arms are being removed
-            if (!level.isClientSide()) ((ArmorStandAccessor) armorStand).armedStands$dropArmItems(level, armorStand.blockPosition());
+        // Toggle arms server-side
+		if (!level.isClientSide()) {
+        	if (/*? >= 1.21.3 >>*//*armorStand.showArms()*/ /*? < 1.21.3 >>*/armorStand.isShowArms() ) {
+            	// Drop items from armor stand if arms are being removed
+            	((ArmorStandAccessor) armorStand).armedStands$dropArmItems(level, armorStand.blockPosition());
 
-            armorStand.setShowArms(false);
-        } else {
-            armorStand.setShowArms(true);
-        }
+				armorStand.setShowArms(false);
+			} else {
+				armorStand.setShowArms(true);
+			}
+		}
 
         return InteractionResult.SUCCESS;
     }

@@ -1,6 +1,7 @@
 package net.tschipcraft.armedstands.mixin;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.item.ItemStack;
@@ -39,10 +40,15 @@ public abstract class ArmorStandConstructorMixin implements ArmorStandAccessor {
 	@Shadow
 	private int disabledSlots;
 
-	// Modify new armor stands to show arms by default
-	@Inject(method = "<init>*", at = @At("TAIL"))
-	private void armedStands$onConstruct(CallbackInfo info) {
-		this.setShowArms(true);
+	// Modify new armor stands server-side to show arms by default
+	@Inject(
+			method = "<init>(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V",
+			at = @At("TAIL")
+	)
+	private void onArmorStandInit(EntityType<? extends ArmorStand> entityType, Level level, CallbackInfo ci) {
+		if (!level.isClientSide()) {
+			this.setShowArms(true);
+		}
 	}
 
 	// Drop main and offhand items if slots are not disabled; called from ArmorStandInteract
