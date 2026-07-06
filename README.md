@@ -11,11 +11,22 @@
 
 ## Features
 
-Simple server-side mod that gives armor stands arms by default. The arms can also be toggled individually by shift-right-clicking an armor stand.
+Simple server-side mod that gives player-placed armor stands arms by default. In vanilla, the arms are normally hidden and can only be shown through commands. With enabled arms, players can place any holdable items in the mainhand and offhand slots of an armor stand.
+
+The arms can also be toggled individually by shift-right-clicking an armor stand. Any items held by the armor stand in the arm slots will drop when toggling. Locked items via the `DisabledSlots` NBT will not be affected.
+
+<details>
+<summary>Shift-right-clicking in action</summary>
+<img width="50%" alt="Toggling Arms" src="https://tschipo.alwaysdata.net/assets/armed-stands/toggling_arms.webp">
+</details>
+
+Also includes a new armor stand item texture with arms for consistency.
+
+<img alt="Armor stand item with arms" src="https://tschipo.alwaysdata.net/assets/armed-stands/item_comparison.png" style="image-rendering: pixelated">
 
 ## Installation
 
-Download the latest release from [here](https://github.com/Tschipcraft/armedstands/releases/latest) and put the .jar file into the `mods` folder in your Minecraft directory.
+[Download the latest release](https://github.com/Tschipcraft/armedstands/releases/latest), and drop the <kbd>.jar</kbd> file into the `mods` folder in your Minecraft directory.
 
 This mod is also available on Modrinth and CurseForge!
 
@@ -40,4 +51,4 @@ Development builds are available on [GitHub Actions](https://github.com/Tschipcr
 
 ## Acknowledgements
 
-Thanks to rotgruengelb for providing the [stonecutter-mod-template](https://github.com/rotgruengelb/stonecutter-mod-template).
+Thanks to rotgruengelb for providing [stonecutter-mod-template](https://github.com/rotgruengelb/stonecutter-mod-template).
