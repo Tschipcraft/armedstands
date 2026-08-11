@@ -81,7 +81,7 @@ public abstract class ArmorStandConstructorMixin implements ArmorStandAccessor {
 				//? >= 1.21.5 {
 				/*((LivingEntity)(Object)this).setItemSlot(EquipmentSlot.OFFHAND, ItemStack.EMPTY);
 				*///?} else {
-				this.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
+				this.setItemSlot(EquipmentSlot.OFFHAND, ItemStack.EMPTY);
 				//?}
 			}
 		}
@@ -94,8 +94,8 @@ public abstract class ArmorStandConstructorMixin implements ArmorStandAccessor {
 	private boolean armedStands$isRemoveDisabled(EquipmentSlot slot) {
 		int flag;
 		//? >= 1.21.3 {
-		//flag = slot.getFilterBit(0);
-		//?} else {
+		/*flag = slot.getFilterBit(0);
+		*///?} else {
 		flag = slot.getFilterFlag();
 		//?}
 		return (this.disabledSlots & (1 << flag)) != 0 || (this.disabledSlots & (1 << (flag + 8))) != 0;
