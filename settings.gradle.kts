@@ -19,7 +19,8 @@ pluginManagement {
 
 plugins {
 	id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
-	id("dev.kikugie.stonecutter") version "0.8"
+	id("dev.kikugie.stonecutter") version "0.9.2"
+	id("dev.kikugie.loom-back-compat") version "0.4.1"
 }
 
 stonecutter {
@@ -27,6 +28,12 @@ stonecutter {
 		fun match(version: String, vararg loaders: String) =
 			loaders.forEach { version("$version-$it", version).buildscript = "build.$it.gradle.kts" }
 
+		// NeoForge 26.2 needs its own target: the interaction event it hooks was replaced
+		// mid-26.2-beta, so it cannot share a source tree with the older NeoForge builds.
+		// The 1.21.5 NeoForge build covers everything from 1.21.5 through 26.1.2 unchanged,
+		// so 26.1.2 only needs a Fabric target.
+		match("26.2", "neoforge")
+		match("26.1.2", "fabric")
 		match("1.21.5", "fabric", "neoforge")
 		match("1.21.3", "fabric", "neoforge")
 		match("1.21.1", "neoforge")

@@ -3,25 +3,49 @@ plugins {
 	id("net.neoforged.moddev")
 }
 
+stonecutter {
+	val (version, loader) = current.project.split('-', limit = 2)
+	properties.tags(version, loader)
+
+	replacements.string(current.parsed >= "1.21.11") {
+		replace("ResourceLocation", "Identifier")
+		replace("location()", "identifier()")
+	}
+}
+
 platform {
 	loader = "neoforge"
 	dependencies {
 		required("minecraft") {
-			forgeVersionRange = minecraftForgeVersionRange()
+			forgeLikeVersionRange = minecraftForgeRange()
 		}
 		required("neoforge") {
-			forgeVersionRange = "[1,)"
+			// `[1,)` by default (divergence 14). A target whose source needs an API that only
+			// exists from a given NeoForge build onward sets `deps.neoforge_range` instead —
+			// two builds of the same Minecraft version can differ, which the Minecraft range
+			// has no way to express.
+			forgeLikeVersionRange = propOr("deps.neoforge_range", "[1,)")
+		}
+		incompatible("poses") {
+			slug("armor-stand-poses")
+			// Store tag only - see build.fabric.gradle.kts.
+			declareInManifest = false
 		}
 	}
 }
 
 neoForge {
-	version = property("deps.neoforge") as String
-	accessTransformers.from(rootProject.file("src/main/resources/aw/${stonecutter.current.version}.cfg"))
-	validateAccessTransformers = true
+	version = prop("deps.neoforge")
+
+	rootProject.file("src/main/resources/aw/${sc.current.version}.cfg")
+		.takeIf { it.exists() }
+		?.let {
+			accessTransformers.from(it)
+			validateAccessTransformers = true
+		}
 
 	if (hasProperty("deps.parchment")) parchment {
-		val (mc, ver) = (property("deps.parchment") as String).split(':')
+		val (mc, ver) = prop("deps.parchment").split(':')
 		mappingsVersion = ver
 		minecraftVersion = mc
 	}
@@ -30,22 +54,22 @@ neoForge {
 		register("client") {
 			client()
 			gameDirectory = file("run/")
-			ideName = "NeoForge Client (${stonecutter.active?.version})"
+			ideName = "NeoForge Client (${sc.current.version})"
 			programArgument("--username=Dev")
 		}
 		register("server") {
 			server()
 			gameDirectory = file("run/")
-			ideName = "NeoForge Server (${stonecutter.active?.version})"
+			ideName = "NeoForge Server (${sc.current.version})"
 		}
 	}
 
 	mods {
-		register(property("mod.id") as String) {
+		register(prop("mod.id")) {
 			sourceSet(sourceSets["main"])
 		}
 	}
-	sourceSets["main"].resources.srcDir("${rootDir}/versions/datagen/${stonecutter.current.version.split("-")[0]}/src/main/generated")
+	sourceSets["main"].resources.srcDir("${rootDir}/versions/datagen/${sc.current.version.split("-")[0]}/src/main/generated")
 }
 
 repositories {
@@ -60,11 +84,4 @@ dependencies {
 
 tasks.named("createMinecraftArtifacts") {
 	dependsOn(tasks.named("stonecutterGenerate"))
-}
-
-stonecutter {
-	replacements.string(current.parsed >= "1.21.11") {
-		replace("ResourceLocation", "Identifier")
-		replace("location()", "identifier()")
-	}
 }

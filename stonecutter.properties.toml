@@ -1,0 +1,135 @@
+loomx.loom_version="1.16-SNAPSHOT"
+
+mod.id = "armedstands"
+mod.name = "Armed Stands"
+mod.group = "net.tschipcraft"
+mod.version = "1.0"
+mod.channel_tag = ""
+mod.description = "Gives all armor stands arms by default. The arms can be toggled individually by shift-right-clicking an armor stand."
+mod.authors = ["Tschipcraft"]
+mod.contributors = ["Fyoncle"]
+mod.inception_year = "2026"
+mod.license.name = "Custom"
+mod.license.url = "https://github.com/Tschipcraft/armedstands/blob/main/LICENSE"
+mod.license.dist = "repo"
+mod.sources_url = "https://github.com/Tschipcraft/armedstands"
+mod.homepage_url = "https://modrinth.com/project/9qYoL1rO"
+mod.issues_url = "https://github.com/Tschipcraft/armedstands/issues"
+mod.environment = "both"   #"client", "server", "both"
+# The mod's logic is server-side; the client half is only the armor stand item texture and lang
+# file. So it stays `environment = "both"`, but Forge/NeoForge must not refuse a connection when
+# the client lacks it - therefore the explicit displayTest.
+mod.forge_display_test = "IGNORE_SERVER_VERSION"
+mod.icon = "icon.png"
+# Points Forge/NeoForge update checks at the Modrinth API. The tokens and project ids used
+# for *publishing* live in the environment instead, see .env.template.
+mod.modrinth_id = "9qYoL1rO"
+
+# Extra links surfaced in the Mod Menu mod entry.
+[mod.links]
+"modmenu.donate" = "https://ko-fi.com/tschipcraft"
+"modmenu.modrinth" = "https://modrinth.com/mod/9qYoL1rO"
+"modmenu.curseforge" = "https://www.curseforge.com/minecraft/mc-mods/armed-stands"
+"modmenu.youtube" = "https://www.youtube.com/@tschipcraft"
+
+[[mod.pom.developers]]
+id = "tschipcraft"
+name = "Tschipcraft"
+url = "https://github.com/Tschipcraft"
+
+[fabric]
+# Armed Stands works with any loader and API version that ships the entrypoints it uses.
+deps.fabric_api_range = "*"
+deps.fabric_loader_range = "*"
+deps.fabric-loader = "0.19.2"
+
+[fabric."1.19.2"]
+deps.minecraft = "1.19.2"
+deps.minecraft_range_lower = "1.19.2"
+deps.minecraft_range_upper = "1.19.4"
+deps.fabric-api = "0.60.0+1.19.2"
+deps.modmenu = "4.0.6"
+publish.additionalVersions = ["1.19.3", "1.19.4"]
+
+[fabric."1.20.1"]
+deps.minecraft = "1.20.1"
+deps.minecraft_range_lower = "1.20"
+deps.minecraft_range_upper = "1.21.1"
+deps.fabric-api = "0.88.1+1.20.1"
+deps.modmenu = "7.0.1"
+publish.additionalVersions = [
+	"1.20", "1.20.2", "1.20.3", "1.20.4", "1.20.5", "1.20.6", "1.21", "1.21.1"
+]
+
+[fabric."1.21.3"]
+deps.minecraft = "1.21.3"
+deps.minecraft_range_lower = "1.21.2"
+deps.minecraft_range_upper = "1.21.4"
+deps.fabric-api = "0.106.1+1.21.3"
+deps.modmenu = "12.0.0"
+publish.additionalVersions = ["1.21.2", "1.21.4"]
+
+[fabric."1.21.5"]
+deps.minecraft = "1.21.5"
+deps.minecraft_range_lower = "1.21.5"
+deps.minecraft_range_upper = "1.21.11"
+deps.fabric-api = "0.119.5+1.21.5"
+deps.modmenu = "14.0.0"
+publish.additionalVersions = ["1.21.6", "1.21.7", "1.21.8", "1.21.9", "1.21.10", "1.21.11"]
+
+[fabric."26.1.2"]
+deps.minecraft = "26.1.2"
+deps.minecraft_range_lower = "26.1"
+deps.fabric-api = "0.146.1+26.1.2"
+deps.modmenu = "18.0.0-alpha.8"
+publish.additionalVersions = ["26.1", "26.1.1", "26.2"]
+
+[forge]
+
+[forge."1.19.2"]
+deps.minecraft = "1.19.2"
+deps.minecraft_range_lower = "1.19.2"
+deps.minecraft_range_upper = "1.19.4"
+deps.forge = "43.5.0"
+publish.additionalVersions = ["1.19.3", "1.19.4"]
+
+[forge."1.20.1"]
+deps.minecraft = "1.20.1"
+deps.minecraft_range_lower = "1.20"
+deps.minecraft_range_upper = "1.20.4"
+deps.forge = "47.4.10"
+publish.additionalVersions = ["1.20", "1.20.2", "1.20.3", "1.20.4"]
+
+[neoforge]
+
+[neoforge."1.21.1"]
+deps.minecraft = "1.21.1"
+deps.minecraft_range_lower = "1.21"
+deps.minecraft_range_upper = "1.21.1"
+deps.neoforge = "21.1.213"
+publish.additionalVersions = ["1.21"]
+
+[neoforge."1.21.3"]
+deps.minecraft = "1.21.3"
+deps.minecraft_range_lower = "1.21.2"
+deps.minecraft_range_upper = "1.21.4"
+deps.neoforge = "21.3.56"
+publish.additionalVersions = ["1.21.2", "1.21.4"]
+
+# Compiled against 1.21.5 but runs unchanged all the way up to 26.1.2.
+[neoforge."1.21.5"]
+deps.minecraft = "1.21.5"
+deps.minecraft_range_lower = "1.21.5"
+deps.minecraft_range_upper = "26.1.2"
+deps.neoforge = "21.5.74"
+publish.additionalVersions = [
+	"1.21.6", "1.21.7", "1.21.8", "1.21.9", "1.21.10", "1.21.11", "26.1", "26.1.1", "26.1.2"
+]
+
+# neoforged/NeoForge#3339 changed EntityInteractSpecific into a location-aware EntityInteract.
+# 26.2.0.43-beta is the first without the class.
+[neoforge."26.2"]
+deps.minecraft = "26.2"
+deps.minecraft_range_lower = "26.2"
+deps.neoforge = "26.2.0.59"
+deps.neoforge_range = "[26.2.0.43-beta,)"
