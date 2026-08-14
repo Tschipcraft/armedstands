@@ -3,7 +3,7 @@ loomx.loom_version="1.16-SNAPSHOT"
 mod.id = "armedstands"
 mod.name = "Armed Stands"
 mod.group = "net.tschipcraft"
-mod.version = "1.0"
+mod.version = "1.1"
 mod.channel_tag = ""
 mod.description = "Gives all armor stands arms by default. The arms can be toggled individually by shift-right-clicking an armor stand."
 mod.authors = ["Tschipcraft"]
@@ -18,14 +18,13 @@ mod.issues_url = "https://github.com/Tschipcraft/armedstands/issues"
 mod.environment = "both"   #"client", "server", "both"
 # The mod's logic is server-side; the client half is only the armor stand item texture and lang
 # file. So it stays `environment = "both"`, but Forge/NeoForge must not refuse a connection when
-# the client lacks it - therefore the explicit displayTest.
+# the client does not have it.
 mod.forge_display_test = "IGNORE_SERVER_VERSION"
 mod.icon = "icon.png"
-# Points Forge/NeoForge update checks at the Modrinth API. The tokens and project ids used
-# for *publishing* live in the environment instead, see .env.template.
+# Points Forge/NeoForge update checks at the Modrinth API.
 mod.modrinth_id = "9qYoL1rO"
 
-# Extra links surfaced in the Mod Menu mod entry.
+# Extra links in the Mod Menu mod entry.
 [mod.links]
 "modmenu.donate" = "https://ko-fi.com/tschipcraft"
 "modmenu.modrinth" = "https://modrinth.com/mod/9qYoL1rO"
