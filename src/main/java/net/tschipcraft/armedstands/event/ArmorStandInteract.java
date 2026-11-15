@@ -1,5 +1,6 @@
 package net.tschipcraft.armedstands.event;
 
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -9,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
+import net.tschipcraft.armedstands.compat.ArmorStandsCompat;
 
 public class ArmorStandInteract {
 
@@ -30,6 +32,11 @@ public class ArmorStandInteract {
 		}
 
 		if (!player.isCrouching()) {
+			return InteractionResult.PASS;
+		}
+
+		// Mod Armor Stands features its own editor with an arms toggle
+		if (player instanceof ServerPlayer serverPlayer && ArmorStandsCompat.canUseEditor(serverPlayer)) {
 			return InteractionResult.PASS;
 		}
 

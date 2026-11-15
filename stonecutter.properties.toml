@@ -3,7 +3,7 @@ loomx.loom_version="1.16-SNAPSHOT"
 mod.id = "armedstands"
 mod.name = "Armed Stands"
 mod.group = "net.tschipcraft"
-mod.version = "1.1"
+mod.version = "1.2"
 mod.channel_tag = ""
 mod.description = "Gives all armor stands arms by default. The arms can be toggled individually by shift-right-clicking an armor stand."
 mod.authors = ["Tschipcraft"]
@@ -125,7 +125,7 @@ publish.additionalVersions = [
 	"1.21.6", "1.21.7", "1.21.8", "1.21.9", "1.21.10", "1.21.11", "26.1", "26.1.1", "26.1.2"
 ]
 
-# neoforged/NeoForge#3339 changed EntityInteractSpecific into a location-aware EntityInteract.
+# neoforged/NeoForge#3339 combined EntityInteractSpecific into EntityInteract.
 # 26.2.0.43-beta is the first without the class.
 [neoforge."26.2"]
 deps.minecraft = "26.2"

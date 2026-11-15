@@ -1,0 +1,1 @@
+- Added compatibility with the mod [Armor Stands](https://modrinth.com/project/FlC9CXUY). It features a GUI editor for armor stands, so the shift-right-click arms toggle from Armed Stands gets disabled for players allowed to use Armor Stands' editor.

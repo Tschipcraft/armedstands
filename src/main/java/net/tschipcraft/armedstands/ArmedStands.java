@@ -1,5 +1,6 @@
 package net.tschipcraft.armedstands;
 
+import net.tschipcraft.armedstands.compat.ArmorStandsCompat;
 import net.tschipcraft.armedstands.platform.Platform;
 
 import org.slf4j.Logger;
@@ -24,7 +25,11 @@ public class ArmedStands {
 	private static final Platform PLATFORM = createPlatformInstance();
 
 	public static void onInitialize() {
-		LOGGER.info("Initialized {} by Tschipcraft on {}", MOD_FRIENDLY_NAME, ArmedStands.xplat().loader());
+		if (ArmedStands.xplat().isModLoaded(ArmorStandsCompat.MOD_ID)) {
+			ArmorStandsCompat.init();
+		}
+
+		LOGGER.info("{} by Tschipcraft on {} is ready to arm the stands!", MOD_FRIENDLY_NAME, ArmedStands.xplat().loader());
 		LOGGER.debug("{}: { version: {}; friendly_name: {} }", MOD_ID, MOD_VERSION, MOD_FRIENDLY_NAME);
 	}
 
