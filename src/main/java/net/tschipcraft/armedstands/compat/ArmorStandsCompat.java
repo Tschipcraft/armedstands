@@ -4,6 +4,7 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.tschipcraft.armedstands.ArmedStands;
 
 /**
@@ -28,11 +29,23 @@ public final class ArmorStandsCompat {
 		try {
 			// Load without initializing
 			Class<?> users = Class.forName(USERS_CLASS, false, ArmorStandsCompat.class.getClassLoader());
-			canEditArmorStands = MethodHandles.publicLookup().findStatic(users, CAN_EDIT_METHOD,
-					MethodType.methodType(boolean.class, ServerPlayer.class));
+			canEditArmorStands = findCanEdit(users);
 			ArmedStands.LOGGER.info("[Armed Stands] Mod Armor Stands detected. Disabled the shift-right-click arms toggle from Armed Stands for players who can use Armor Stands' editor");
 		} catch (ReflectiveOperationException | RuntimeException | LinkageError e) {
 			ArmedStands.LOGGER.warn("[Armed Stands] Mod Armor Stands detected, but its permission check could not be found ({})", e.toString());
+		}
+	}
+
+	private static MethodHandle findCanEdit(Class<?> users) throws ReflectiveOperationException {
+		MethodType serverPlayerCheck = MethodType.methodType(boolean.class, ServerPlayer.class);
+		try {
+			// Armor Stands 2.x and later
+			return MethodHandles.publicLookup().findStatic(users, CAN_EDIT_METHOD, serverPlayerCheck);
+		} catch (NoSuchMethodException e) {
+			// Armor Stands 1.x (Minecraft 1.19 to 1.20.4)
+			return MethodHandles.publicLookup()
+					.findStatic(users, CAN_EDIT_METHOD, MethodType.methodType(boolean.class, Player.class))
+					.asType(serverPlayerCheck);
 		}
 	}
 
